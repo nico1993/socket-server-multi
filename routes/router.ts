@@ -2,9 +2,41 @@ import {Router, Request, Response } from 'express';
 import Server from '../classes/server';
 import { usuariosConectados } from '../sockets/socket';
 import { GraficaData } from '../classes/grafica';
+import { Mapa } from '../classes/mapa';
 
 const router = Router();
 
+//Mapas
+export const mapa = new Mapa();
+const lugares = [
+    {
+        id: '1',
+        nombre: 'Udemy',
+        lat: 37.784679,
+        lng: -122.395936
+    },
+    {
+        id: '2',  
+        nombre: 'Bahía de San Francisco',
+        lat: 37.798933,
+        lng: -122.377732
+    },
+    {
+        id: '3',
+        nombre: 'The Palace Hotel',
+        lat: 37.788578,
+        lng: -122.401745
+    }
+];
+
+mapa.marcadores.push(...lugares);
+
+router.get('/marcadores', (request:Request, response:Response) => {
+    response.json(mapa.getMarcadores());
+});
+
+
+//Graficas
 const grafica = new GraficaData();
 
 router.get('/grafica', (request:Request, response:Response) => {

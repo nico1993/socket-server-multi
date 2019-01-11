@@ -43,6 +43,13 @@ export default class Server
 
             //Obtener usuarios
             socket.obtenerUsuarios(cliente);
+
+            //Mapas - nuevo marcador
+            socket.nuevoMarcador(cliente, this.io);
+            //Mapas - borrar marcador
+            socket.borrarMarcador(cliente, this.io);
+            //Mapas - mover marcador
+            socket.moverMarcador(cliente, this.io);
         });
     }
 
